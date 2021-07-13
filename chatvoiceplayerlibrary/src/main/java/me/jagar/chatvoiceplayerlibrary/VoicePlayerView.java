@@ -12,6 +12,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -168,14 +169,21 @@ import java.net.URLConnection;
 
     //Set the audio source and prepare mediaplayer
 
-    public void setAudio(String audioPath){
+    public void setAudio(String audioPath, Boolean prepareAsync){
         path = audioPath;
         mediaPlayer =  new MediaPlayer();
         if (path != null) {
             try {
                 mediaPlayer.setDataSource(path);
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mediaPlayer.prepare();
+                mediaPlayer.setAudioAttributes(
+                        new AudioAttributes.Builder().setContentType(
+                                AudioAttributes.CONTENT_TYPE_MUSIC
+                        ).build()
+                );
+                if (prepareAsync)
+                    mediaPlayer.prepareAsync();
+                else
+                    mediaPlayer.prepare();
                 mediaPlayer.setVolume(10, 10);
                 //START and PAUSE are in other listeners
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
