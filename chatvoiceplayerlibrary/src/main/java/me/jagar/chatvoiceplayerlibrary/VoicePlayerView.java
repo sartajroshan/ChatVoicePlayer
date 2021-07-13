@@ -180,6 +180,7 @@ import java.net.URLConnection;
                                 AudioAttributes.CONTENT_TYPE_MUSIC
                         ).build()
                 );
+                imgPlay.setEnabled(false);
                 if (prepareAsync)
                     mediaPlayer.prepareAsync();
                 else
@@ -189,6 +190,7 @@ import java.net.URLConnection;
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
+                        imgPlay.setEnabled(false);
                         seekBar.setMax(mp.getDuration());
                         if (seekbarV.getVisibility() == VISIBLE){
                             seekbarV.setMax(mp.getDuration());
@@ -199,6 +201,7 @@ import java.net.URLConnection;
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
+                        imgPlay.setEnabled(true);
                         imgPause.setVisibility(View.GONE);
                         imgPlay.setVisibility(View.VISIBLE);
                     }
