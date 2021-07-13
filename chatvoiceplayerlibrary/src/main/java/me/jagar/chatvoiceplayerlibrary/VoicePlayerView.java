@@ -190,7 +190,7 @@ import java.net.URLConnection;
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
-                        imgPlay.setEnabled(false);
+                        imgPlay.setEnabled(true);
                         seekBar.setMax(mp.getDuration());
                         if (seekbarV.getVisibility() == VISIBLE){
                             seekbarV.setMax(mp.getDuration());
